@@ -7,6 +7,14 @@ public class MakeDamage : MonoBehaviour
     // Variables a configurar desde el editor
     [Header("Setup")]
     [SerializeField] float damage = 1f;
+    [SerializeField] private AudioClip DamageSFX;
+
+    private AudioSource audiosource;
+
+    private void OnEnable()
+    {
+        audiosource = GetComponent<AudioSource>();
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -15,6 +23,9 @@ public class MakeDamage : MonoBehaviour
             Player player = collision.gameObject.GetComponent<Player>();
             player.TakeDamage(-damage);
             Debug.Log(" PUNTOS DE DAÑO REALIZADOS AL JUGADOR " + damage);
+            if (audiosource.isPlaying) { return; }
+            audiosource.PlayOneShot(DamageSFX);
+            
         }
     }
 }

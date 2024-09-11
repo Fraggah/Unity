@@ -6,16 +6,22 @@ public class PlayerJump : MonoBehaviour
 {
 
     [Header("Movement")]
-    [SerializeField] private float jumpForce = 5f;
+    [SerializeField] private float jumpForce = 50f;
+
+    [SerializeField] private AudioClip jumpSFX;
 
     private bool canJump = true;
     private bool jumping = false;
 
+    private Animator animator;
     private Rigidbody2D rb;
+    private AudioSource audiosource;
 
     private void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        audiosource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -23,7 +29,10 @@ public class PlayerJump : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space)&& canJump)
         {
             canJump = false;
+            if (audiosource.isPlaying) { return; }
+            audiosource.PlayOneShot(jumpSFX);
         }
+        animator.SetBool("Jumping", jumping);
     }
 
     private void FixedUpdate()
