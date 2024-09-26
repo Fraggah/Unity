@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     // Un array de posiciones para la cámara que puedes editar en el Inspector
     public Vector3[] cameraPositions;
     public Vector3[] doorPositions;
+    public Vector3 initialPlayerPosition;
 
     private void Awake()
     {
