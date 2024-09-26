@@ -22,7 +22,7 @@ public class MakeDamage : MonoBehaviour
         {
             Player player = collision.gameObject.GetComponent<Player>();
             player.TakeDamage(-damage);
-            Debug.Log(" PUNTOS DE DAÑO REALIZADOS AL JUGADOR " + damage);
+            Debug.Log("Vidas: " + player.lifes);
             if (audiosource.isPlaying) { return; }
             audiosource.PlayOneShot(DamageSFX);
             

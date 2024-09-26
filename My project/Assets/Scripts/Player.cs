@@ -5,12 +5,24 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [Header("Setup")]
-    [SerializeField] private float lifes = 5f;
+    [SerializeField] public float lifes = 3f;
+
+    void Awake()
+    {
+        Debug.Log("Vidas: " + lifes);
+    }
+
+    void Update()
+    {
+        if(!Alive())
+        {
+            LooseGame();
+        }
+    }
 
     public void TakeDamage(float damage)
     {
         lifes += damage;
-        Debug.Log(Alive());
     }
 
 
@@ -19,10 +31,9 @@ public class Player : MonoBehaviour
         return lifes > 0;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void LooseGame()
     {
-        if (!collision.gameObject.CompareTag("Finish")) { return; }
-
-        Debug.Log("Win");
+        Camera.main.transform.position = GameManager.instance.cameraPositions[3];
+        Debug.Log("GAME OVER");
     }
 }
