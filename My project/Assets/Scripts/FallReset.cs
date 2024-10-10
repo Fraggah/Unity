@@ -1,37 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Playables; // Importar la biblioteca para usar Timeline
+using UnityEngine.Playables; 
 
 public class FallReset : MonoBehaviour
 {
-    [SerializeField] private PlayableDirector timelineDirector; // Referencia al PlayableDirector
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    [SerializeField] private PlayableDirector timelineDirector; 
+    [SerializeField] float damage = 1f;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-        if (player != null)
+        if (collision.CompareTag("Player"))
         {
-            // Restablecer la posición del jugador
-            player.transform.position = GameManager.instance.initialPlayerPosition;
+            Player player = collision.gameObject.GetComponent<Player>();
+            player.TakeDamage(-damage);
+            Debug.Log("Vidas: " + player.lifes);
 
-            // Restablecer la posición de la cámara
+            collision.transform.position = GameManager.instance.initialPlayerPosition;
+
             Camera.main.transform.position = GameManager.instance.cameraPositions[0];
 
-            // Reproducir el Timeline si está asignado
             if (timelineDirector != null)
             {
                 timelineDirector.Play();

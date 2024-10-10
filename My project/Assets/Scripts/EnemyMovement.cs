@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public float speed = 2f;
-    public float moveDistance = 3f;
+    [SerializeField] private float speed = 2f;
+    [SerializeField] private float moveDistance = 3f;
 
     private Vector2 startingPosition;
     private bool movingRight = true;

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyJump : MonoBehaviour
 {
-    public float jumpForce = 5f;
-    public float jumpInterval = 2f;
+    [SerializeField] private float jumpForce = 5f;
+    [SerializeField] private float jumpInterval = 2f;
 
     private Rigidbody2D rb;
 

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MakeDamage : MonoBehaviour
 {
-    // Variables a configurar desde el editor
     [Header("Setup")]
     [SerializeField] float damage = 1f;
+    [SerializeField] private float pushForce = 10f;
     [SerializeField] private AudioClip DamageSFX;
 
     private AudioSource audiosource;
@@ -21,11 +21,24 @@ public class MakeDamage : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Player player = collision.gameObject.GetComponent<Player>();
-            player.TakeDamage(-damage);
-            Debug.Log("Vidas: " + player.lifes);
-            if (audiosource.isPlaying) { return; }
-            audiosource.PlayOneShot(DamageSFX);
-            
+            if (player != null)
+            {
+
+                player.TakeDamage(-damage);
+                Debug.Log("Vidas: " + player.lifes);
+
+                Rigidbody2D playerRb = player.GetComponent<Rigidbody2D>();
+                if (playerRb != null)
+                {
+                    Vector2 pushDirection = -playerRb.velocity.normalized;
+                    playerRb.velocity = pushDirection * pushForce;
+                }
+
+                if (!audiosource.isPlaying)
+                {
+                    audiosource.PlayOneShot(DamageSFX);
+                }
+            }
         }
     }
 }
