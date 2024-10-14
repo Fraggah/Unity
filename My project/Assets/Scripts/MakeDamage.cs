@@ -5,8 +5,8 @@ using UnityEngine;
 public class MakeDamage : MonoBehaviour
 {
     [Header("Setup")]
-    [SerializeField] float damage = 1f;
-    [SerializeField] private float pushForce = 10f;
+    [SerializeField] private float damage = 1f; 
+    [SerializeField] private float pushForce = 10f; 
     [SerializeField] private AudioClip DamageSFX;
 
     private AudioSource audiosource;
@@ -20,12 +20,13 @@ public class MakeDamage : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+
             Player player = collision.gameObject.GetComponent<Player>();
-            if (player != null)
+            if (player != null && player.PlayerProfile != null)
             {
 
-                player.TakeDamage(-damage);
-                Debug.Log("Vidas: " + player.lifes);
+                player.PlayerProfile.Lifes -= (int)damage;
+                Debug.Log("Vidas restantes: " + player.PlayerProfile.Lifes);
 
                 Rigidbody2D playerRb = player.GetComponent<Rigidbody2D>();
                 if (playerRb != null)

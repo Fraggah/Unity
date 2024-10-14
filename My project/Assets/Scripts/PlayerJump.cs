@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerJump : MonoBehaviour
 {
+    [SerializeField]
+    private PlayerProfile playerProfile; 
+    public PlayerProfile PlayerProfile { get => playerProfile; }
 
-    [Header("Movement")]
-    [SerializeField] private float jumpForce = 50f;
+    private float jumpForce;
 
     [SerializeField] private AudioClip jumpSFX;
 
@@ -17,8 +19,10 @@ public class PlayerJump : MonoBehaviour
     private Rigidbody2D rb;
     private AudioSource audiosource;
 
-    private void OnEnable()
+    private void Awake()
     {
+        jumpForce = playerProfile.JumpForce;
+
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         audiosource = GetComponent<AudioSource>();
@@ -26,18 +30,20 @@ public class PlayerJump : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)&& canJump)
+        if (Input.GetKeyDown(KeyCode.Space) && canJump)
         {
             canJump = false;
-            if (audiosource.isPlaying) { return; }
-            audiosource.PlayOneShot(jumpSFX);
+            if (!audiosource.isPlaying)
+            {
+                audiosource.PlayOneShot(jumpSFX);
+            }
         }
         animator.SetBool("Jumping", jumping);
     }
 
     private void FixedUpdate()
     {
-        if(!canJump && !jumping) 
+        if (!canJump && !jumping)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             jumping = true;
@@ -49,5 +55,4 @@ public class PlayerJump : MonoBehaviour
         canJump = true;
         jumping = false;
     }
-
 }

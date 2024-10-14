@@ -5,27 +5,31 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [Header("Setup")]
-    [SerializeField] public float lifes = 3f;
-    public bool hadKey = false;
+    [SerializeField]
+    private PlayerProfile playerProfile; 
+    public PlayerProfile PlayerProfile { get => playerProfile; }
+
+    private int lifes; 
 
     void Awake()
     {
+        lifes = playerProfile.Lifes;
         Debug.Log("Vidas: " + lifes);
     }
 
     void Update()
     {
-        if(!Alive())
+        if (!Alive())
         {
             LooseGame();
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
-        lifes += damage;
+        lifes -= damage; 
+        playerProfile.Lifes = lifes;
     }
-
 
     private bool Alive()
     {

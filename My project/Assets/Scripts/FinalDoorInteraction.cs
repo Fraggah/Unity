@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class finalDoorInteraction : MonoBehaviour
 {
-
     [SerializeField] private AudioClip doorLocked;
     [SerializeField] private AudioClip openDoor;
     [SerializeField] private AudioClip enterDoor;
 
     private bool isNearDoor = false;
-    private SpriteRenderer spriteRenderer; 
+    private SpriteRenderer spriteRenderer;
     private AudioSource audiosource;
 
     [Header("Sprites")]
     [SerializeField] private Sprite defaultSprite;
-    [SerializeField] private Sprite nearSprite;   
+    [SerializeField] private Sprite nearSprite;
 
     private GameObject player;
-    private Player playerScript; //para obatener acceso a el script que tiene el bool hadKey
+    private Player playerScript;
+    private Collect playerCollectScript;
 
     private void OnEnable()
     {
@@ -38,6 +38,7 @@ public class finalDoorInteraction : MonoBehaviour
         if (player != null)
         {
             playerScript = player.GetComponent<Player>();
+            playerCollectScript = player.GetComponent<Collect>();
         }
     }
 
@@ -45,10 +46,12 @@ public class finalDoorInteraction : MonoBehaviour
     {
         if (isNearDoor && Input.GetKeyDown(KeyCode.E) && playerScript != null)
         {
-            if (playerScript.hadKey)
+            // Verificar si hay llaves
+            if (playerCollectScript.GetKeys().Count > 0)
             {
                 Debug.Log("Ganaste!");
-                TeleportPlayer();
+                TeleportPlayer(playerCollectScript.GetKeys()[0]); // Pasar la llave a usar
+                playerCollectScript.GetKeys().RemoveAt(0); // Eliminar la llave de la lista
                 if (!audiosource.isPlaying)
                 {
                     audiosource.PlayOneShot(enterDoor);
@@ -71,14 +74,14 @@ public class finalDoorInteraction : MonoBehaviour
         {
             isNearDoor = true;
 
-            if (playerScript.hadKey)
+            if (playerCollectScript.GetKeys().Count > 0)
             {
                 if (spriteRenderer != null && nearSprite != null)
                 {
                     spriteRenderer.sprite = nearSprite;
                 }
 
-                if (playerScript != null && !audiosource.isPlaying)
+                if (playerCollectScript != null && !audiosource.isPlaying)
                 {
                     audiosource.PlayOneShot(openDoor);
                 }
@@ -100,7 +103,7 @@ public class finalDoorInteraction : MonoBehaviour
         }
     }
 
-    private void TeleportPlayer()
+    private void TeleportPlayer(GameObject key)
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 

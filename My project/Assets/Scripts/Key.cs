@@ -13,7 +13,7 @@ public class Key : MonoBehaviour
         audiosource = GetComponent<AudioSource>();
         if (audiosource == null)
         {
-            Debug.LogError("AudioSource no encontrado en el objeto de la llave.");
+            Debug.LogError("AudioSource no encontrado");
         }
     }
 
@@ -25,7 +25,6 @@ public class Key : MonoBehaviour
 
             if (playerScript != null)
             {
-                playerScript.hadKey = true; //
                 Debug.Log("Encontraste una llave!");
                 if (!audiosource.isPlaying)
                 {
