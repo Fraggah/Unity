@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ddafa35b40557f44b94dd8d5c08de9c, type: 3}
   m_Name: NewPlayerProfile
   m_EditorClassIdentifier: 
-  lifes: 5
-  jumpForce: 0.8
+  initialLifes: 5
+  initialJumpForce: 0.8

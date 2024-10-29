@@ -6,10 +6,11 @@ public class Player : MonoBehaviour
 {
     [Header("Setup")]
     [SerializeField]
-    private PlayerProfile playerProfile; 
+    private PlayerProfile playerProfile;
     public PlayerProfile PlayerProfile { get => playerProfile; }
 
-    private int lifes; 
+    private int lifes;
+    private bool isGameOver = false;
 
     void Awake()
     {
@@ -19,21 +20,30 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (!Alive())
+        if (!Alive() && !isGameOver)
         {
             LooseGame();
+            isGameOver = true; 
         }
     }
 
     public void TakeDamage(int damage)
     {
-        lifes -= damage; 
+        lifes -= Mathf.Abs(damage);  
         playerProfile.Lifes = lifes;
+
+        Debug.Log("Vidas: " + lifes);
+
+        if (lifes <= 0 && !isGameOver)
+        {
+            LooseGame();
+            isGameOver = true;
+        }
     }
 
     private bool Alive()
     {
-        return lifes > 0;
+        return playerProfile.Lifes > 0;
     }
 
     private void LooseGame()
