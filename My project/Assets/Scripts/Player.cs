@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
@@ -9,13 +10,15 @@ public class Player : MonoBehaviour
     private PlayerProfile playerProfile;
     public PlayerProfile PlayerProfile { get => playerProfile; }
 
-    private int lifes;
     private bool isGameOver = false;
 
-    void Awake()
+    [SerializeField]
+    private UnityEvent<int> OnLivesChanged;
+
+    private void Start()
     {
-        lifes = playerProfile.Lifes;
-        Debug.Log("Vidas: " + lifes);
+        OnLivesChanged.Invoke(playerProfile.Lifes);
+        Debug.Log("Vidas: " + playerProfile.Lifes);
     }
 
     void Update()
@@ -29,12 +32,13 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        lifes -= Mathf.Abs(damage);  
-        playerProfile.Lifes = lifes;
+        playerProfile.Lifes = playerProfile.Lifes - damage;
 
-        Debug.Log("Vidas: " + lifes);
+        Debug.Log("Vidas: " + playerProfile.Lifes);
 
-        if (lifes <= 0 && !isGameOver)
+        OnLivesChanged.Invoke(playerProfile.Lifes);
+
+        if (playerProfile.Lifes <= 0 && !isGameOver)
         {
             LooseGame();
             isGameOver = true;
