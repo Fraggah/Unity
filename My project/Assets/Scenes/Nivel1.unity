@@ -1083,6 +1083,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerProfile: {fileID: 11400000, guid: c2b24ac366a5e62459f5cf20502793c3, type: 2}
+  pushForce: 10
+  damageSFX: {fileID: 8300000, guid: 3cba105beb464b44ea80ea86a560222b, type: 3}
   OnLivesChanged:
     m_PersistentCalls:
       m_Calls:

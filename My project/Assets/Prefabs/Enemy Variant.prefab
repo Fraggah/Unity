@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 4300281637716926406}
   m_Layer: 6
   m_Name: Enemy Variant
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8676928168168436223}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e3ff36724ebcd848be48d9a19fd6059, type: 3}
   m_Name: 
@@ -182,6 +182,10 @@ MonoBehaviour:
   damage: 1
   pushForce: 5
   DamageSFX: {fileID: 8300000, guid: 3cba105beb464b44ea80ea86a560222b, type: 3}
+  playerProfile: {fileID: 11400000, guid: c2b24ac366a5e62459f5cf20502793c3, type: 2}
+  OnLivesChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!95 &2559421338927287553
 Animator:
   serializedVersion: 5

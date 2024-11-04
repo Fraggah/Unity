@@ -11,7 +11,6 @@ public class HUDController : MonoBehaviour
 
     public void UpdateLifesHUD(int lifes)
     {
-        Debug.Log("Vidas actuales en HUD: " + lifes);
 
         if (IsEmptyContainer())
         {
@@ -21,12 +20,10 @@ public class HUDController : MonoBehaviour
 
         if (HowManyLifeIcons() > lifes)
         {
-            Debug.Log("Eliminando último icono");
             DeleteLastIcon();
         }
         else
         {
-            Debug.Log("Creando icono de vida");
             CreateIcon();
         }
 
