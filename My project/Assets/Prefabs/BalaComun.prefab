@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2286273693111990549}
   - component: {fileID: 912099805272318916}
   m_Layer: 0
-  m_Name: Bala
+  m_Name: BalaComun
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,6 +168,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7643007350163999875}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11a815471d2d4b841ab6ecff501f638b, type: 3}
+  m_Script: {fileID: 11500000, guid: 86ab9ee9b64da0c4a8c63b2638ea73ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5

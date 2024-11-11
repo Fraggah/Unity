@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 160859486107443883}
   - component: {fileID: 3495092763011096016}
   - component: {fileID: 7746394931354250494}
-  - component: {fileID: 5480747665266021597}
   - component: {fileID: 2559421338927287553}
   - component: {fileID: 5055373397445752186}
   - component: {fileID: 4300281637716926406}
@@ -167,25 +166,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   moveDistance: 3
---- !u!114 &5480747665266021597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8676928168168436223}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e3ff36724ebcd848be48d9a19fd6059, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
-  pushForce: 5
-  DamageSFX: {fileID: 8300000, guid: 3cba105beb464b44ea80ea86a560222b, type: 3}
-  playerProfile: {fileID: 11400000, guid: c2b24ac366a5e62459f5cf20502793c3, type: 2}
-  OnLivesChanged:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!95 &2559421338927287553
 Animator:
   serializedVersion: 5

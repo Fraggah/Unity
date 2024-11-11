@@ -14,25 +14,27 @@ public class PooledSpawner : MonoBehaviour
     [Range(0.5f, 5f)]
     private float intervalTime;
 
+    private ObjectPool objectPool;
+
+    private void Awake()
+    {
+        objectPool = GetComponent<ObjectPool> ();
+    }
+
     void Start()
     {
-        //InvokeRepeating(nameof(SpawnRandom), waitingTime, intervalTime);
+        InvokeRepeating(nameof(GenerarObjetoLoop), waitingTime, intervalTime);
     }
 
-    void SpawnRandom()
+    void GenerarObjetoLoop()
     {
-        int randomIndex = Random.Range(0, prefabs.Length);
-        GameObject randomPrefab = prefabs[randomIndex];
-        Instantiate(randomPrefab, transform.position, Quaternion.identity);
-    }
+        GameObject pooledObject = objectPool.GetPooledObject();
 
-    private void OnBecameInvisible()
-    {
-        CancelInvoke(nameof(SpawnRandom));
-    }
-
-    private void OnBecameVisible()
-    {
-        InvokeRepeating(nameof(SpawnRandom), waitingTime, intervalTime);
+        if (pooledObject != null)
+        {
+            pooledObject.transform.position = transform.position;
+            pooledObject.transform.rotation = Quaternion.identity;
+            pooledObject.SetActive(true);
+        }
     }
 }

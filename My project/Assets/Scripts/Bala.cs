@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bala : MonoBehaviour
+public abstract class Bala : MonoBehaviour
+    
 {
-    // Método que se llama al detectar una colisión
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnEnable()
     {
-        // Destruye el objeto cuando colisiona con cualquier cosa
-        Destroy(gameObject);
+        Impulse(); 
     }
+
+    protected void OnCollisionEnter2D(Collision2D collision)
+    {
+        gameObject.SetActive(false);
+    }
+
+    protected abstract void Impulse();
 }
