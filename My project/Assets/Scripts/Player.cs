@@ -16,8 +16,8 @@ public class Player : MonoBehaviour
     private bool isGameOver = false;
     [SerializeField] private UnityEvent<int> OnLivesChanged;
 
-    private float invulnerabilityTime = 0.5f; // Tiempo de invulnerabilidad en segundos
-    private float lastDamageTime; // Marca el tiempo del último daño recibido
+    private float invulnerabilityTime = 0.5f;
+    private float lastDamageTime;
 
     private void Start()
     {
@@ -76,14 +76,12 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            // Comprobar si ha pasado suficiente tiempo desde el último daño
             if (Time.time - lastDamageTime >= invulnerabilityTime)
             {
                 int damage = 1;
                 Vector2 pushDirection = collision.contacts[0].point - (Vector2)transform.position;
                 TakeDamage(damage, -pushDirection);
 
-                // Actualizar el último tiempo de daño recibido
                 lastDamageTime = Time.time;
             }
         }

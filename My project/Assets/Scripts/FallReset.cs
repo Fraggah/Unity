@@ -6,7 +6,7 @@ using UnityEngine.Playables;
 public class FallReset : MonoBehaviour
 {
     [SerializeField] private PlayableDirector timelineDirector;
-    [SerializeField] private float damage = 1f;
+    [SerializeField] private float damage = 0f;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
