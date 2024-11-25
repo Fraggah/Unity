@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7567201048296673105}
   m_Layer: 0
   m_Name: DeathZone
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,3 +145,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timelineDirector: {fileID: 0}
   damage: 0
+  mapObjectName: ---- MAP ----
+  gridChildName: Grid
+  plataformChildName: Plataform
+  decorationChildName: Decorations
+  playerTransportPosition: {x: 0, y: 0, z: 0}
+  cameraTransportPosition: {x: 0, y: 0, z: 0}
